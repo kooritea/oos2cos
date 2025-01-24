@@ -28,3 +28,5 @@ bash ./main.sh ./PKG110_15.0.0.405.zip
 - 6、使用kernelsu/magisk安装模块，安装完之后暂不立即重启，使用带有root权限的文件管理器删除/data/system/package_cache下的所有文件夹，注意不是删除/data/system/package_cache文件夹
 
 - 7、重启
+
+- 8、部分app(如google日历)如果被play商店更新了，则直接卸载即可使用回本地化后的日历

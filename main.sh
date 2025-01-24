@@ -23,6 +23,7 @@ model=$(echo "$filename" | awk -F'_' '{print $1}')
 version=$(echo "$filename" | awk -F'_' '{print $2}' | awk -F'.zip' '{print $1}')
 IFS='.' read -r -a parts <<< "$version"
 version_code=$((parts[0] * 100000000 + parts[1] * 1000000 + parts[2] * 10000 + parts[3]))
+REMOVEPATH=""
 
 while true
 do
@@ -88,6 +89,8 @@ cp -r $work_dir/extracted/my_stock/app/COSA/ $work_dir/module/system/product/app
 cp -r $work_dir/extracted/my_stock/del-app/FileManager/ $work_dir/module/system/product/app/
 cp -r $work_dir/extracted/my_stock/del-app/OppoWeather2/ $work_dir/module/system/product/app/
 cp -r $work_dir/extracted/my_stock/app/SmartSideBar/ $work_dir/module/system/product/app/
+cp -r $work_dir/extracted/my_stock/del-app/Calendar/ $work_dir/module/system/product/app/
+REMOVEPATH="$REMOVEPATH\n/system/product/app/CalendarGoogle"
 
 mkdir -p $work_dir/module/system/product/priv-app/
 cp -r $work_dir/extracted/my_stock/app/AIWidgets/ $work_dir/module/system/product/priv-app/
@@ -128,5 +131,7 @@ cp -r $work_dir/extracted/my_stock/del-app/UPTsmService/ $work_dir/module/system
 mkdir -p $work_dir/module/system/system_ext/priv-app/
 cp -r $work_dir/extracted/system_ext/priv-app/BlurService/ $work_dir/module/system/system_ext/priv-app/
 cp -r $work_dir/extracted/system_ext/priv-app/DeepThinker/ $work_dir/module/system/system_ext/priv-app/
+
+sed -i "s|REMOVE_MATCH|$REMOVEPATH\n|g" $work_dir/module/customize.sh
 
 7z a -tzip oos2cos-$model-$version_code.zip $work_dir/module/*
