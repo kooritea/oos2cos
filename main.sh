@@ -20,7 +20,7 @@ for c in $dependencies; do
 done
 
 model=$(echo "$filename" | awk -F'_' '{print $1}')
-version=$(echo "$filename" | awk -F'[_()]' '{print $2}')
+version=$(echo "$filename" | awk -F'_' '{print $2}' | awk -F'.zip' '{print $1}')
 IFS='.' read -r -a parts <<< "$version"
 version_code=$((parts[0] * 100000000 + parts[1] * 1000000 + parts[2] * 10000 + parts[3]))
 
@@ -65,6 +65,8 @@ cp -r module_template $module_dir
 sed -i s/VERSION_MATCH/$version/g $work_dir/module/module.prop
 sed -i s/VERSIONCODE_MATCH/$version_code/g $work_dir/module/module.prop
 sed -i s/MODEL_MATCH/$model/g $work_dir/module/system.prop
+
+mkdir -p $work_dir/module/my_region
 cp $work_dir/extracted/my_region/build.prop $work_dir/module/my_region/build.prop
 
 mkdir -p $work_dir/module/my_region/etc/battery
