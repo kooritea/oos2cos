@@ -21,8 +21,14 @@ done
 
 model=$(echo "$filename" | awk -F'_' '{print $1}')
 version=$(echo "$filename" | awk -F'_' '{print $2}' | awk -F'.zip' '{print $1}')
+read -p "自定义小版本号 (0-99): " local_version
+if [[ "$local_version" =~ ^[0-9]{1,2}$ ]]; then
+  version="$version.$local_version"
+else
+  version="$version.0"
+fi
 IFS='.' read -r -a parts <<< "$version"
-version_code=$((parts[0] * 100000000 + parts[1] * 1000000 + parts[2] * 10000 + parts[3]))
+version_code=$((parts[0] * 10000000000 + parts[1] * 100000000 + parts[2] * 1000000 + parts[3] * 100 + parts[4]))
 REMOVEPATH=""
 
 while true
