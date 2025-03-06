@@ -80,12 +80,15 @@ mkdir -p $work_dir/module/my_region/etc/battery
 cp $work_dir/extracted/my_region/etc/battery/sys_deviceidle_whitelist.xml $work_dir/module/my_region/etc/battery/sys_deviceidle_whitelist.xml
 mkdir -p $work_dir/module/my_region/etc/extension
 cp $work_dir/extracted/my_region/etc/extension/com.oplus.app-features.xml $work_dir/module/my_region/etc/extension/com.oplus.app-features.xml
+sed -i '/<app_feature name="com.oplus.securitypermission.shortcut_enable" args="boolean:true"\/>/d' $work_dir/module/my_region/etc/extension/com.oplus.app-features.xml
+
 cp $work_dir/extracted/my_region/etc/extension/com.oplus.oplus-feature.xml $work_dir/module/my_region/etc/extension/com.oplus.oplus-feature.xml
 cp -r $work_dir/extracted/my_region/etc/startup/ $work_dir/module/my_region/etc/startup/
 
 mkdir -p $work_dir/module/system/product/app/
 cp -r $work_dir/extracted/my_stock/app/AIUnit/ $work_dir/module/system/product/app/
 cp -r $work_dir/extracted/my_product/app/AONService/ $work_dir/module/system/product/app/
+cp -r $work_dir/extracted/my_product/app/OplusCamera/ $work_dir/module/system/product/app/
 cp -r $work_dir/extracted/my_stock/app/AssistantScreen/ $work_dir/module/system/product/app/
 cp -r $work_dir/extracted/my_stock/app/BeaconLink/ $work_dir/module/system/product/app/
 cp -r $work_dir/extracted/my_stock/app/ColorAccessibilityAssistant/ $work_dir/module/system/product/app/
