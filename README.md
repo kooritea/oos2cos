@@ -13,8 +13,8 @@
 - 3、安装所需依赖，以arch系发行版为例，其他发行版自行解决
 
 ```bash
-yay -s payload-dumper-go
-sudo pacman -S erofs-utils 7z
+yay -S payload-dumper-go-bin
+sudo pacman -S erofs-utils 7zip
 ```
 
 - 4、进入项目根目录打开shell进行提取
@@ -30,3 +30,7 @@ bash ./main.sh ./PKG110_15.0.0.405.zip
 - 7、重启
 
 - 8、部分app(如google日历)如果被play商店更新了，则直接卸载即可使用回本地化后的日历
+
+## 其他
+
+自启动权限可以通过使用创建快捷方式到com.oplus.battery的com.oplus.startupapp.view.StartupAppListActivity进行管理(`需root权限`)

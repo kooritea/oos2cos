@@ -83,6 +83,8 @@ cp $work_dir/extracted/my_region/etc/extension/com.oplus.app-features.xml $work_
 sed -i '/<app_feature name="com.oplus.securitypermission.shortcut_enable" args="boolean:true"\/>/d' $work_dir/module/my_region/etc/extension/com.oplus.app-features.xml
 
 cp $work_dir/extracted/my_region/etc/extension/com.oplus.oplus-feature.xml $work_dir/module/my_region/etc/extension/com.oplus.oplus-feature.xml
+sed -i '/<oplus-feature name="oplus.software.startup_strategy_restrict"\/>/d' $work_dir/module/my_region/etc/extension/com.oplus.oplus-feature.xml
+
 cp -r $work_dir/extracted/my_region/etc/startup/ $work_dir/module/my_region/etc/startup/
 
 mkdir -p $work_dir/module/system/product/app/
