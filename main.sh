@@ -61,11 +61,12 @@ fi
 
 7z x "$file" "payload.bin" -o$work_dir
 # payload-dumper-go -output "$work_dir/extracted"  "$work_dir/payload.bin"
-payload-dumper-go -partitions my_region,my_stock,system_ext,my_product -output "$work_dir/extracted"  "$work_dir/payload.bin"
+payload-dumper-go -partitions my_region,my_stock,system_ext,my_product,system -output "$work_dir/extracted"  "$work_dir/payload.bin"
 fsck.erofs "$work_dir/extracted/my_region.img" --extract=$work_dir/extracted/my_region
 fsck.erofs "$work_dir/extracted/my_stock.img" --extract=$work_dir/extracted/my_stock
 fsck.erofs "$work_dir/extracted/system_ext.img" --extract=$work_dir/extracted/system_ext
 fsck.erofs "$work_dir/extracted/my_product.img" --extract=$work_dir/extracted/my_product
+fsck.erofs "$work_dir/extracted/system.img" --extract=$work_dir/extracted/system
 
 cp -r module_template $module_dir
 
@@ -140,6 +141,12 @@ cp -r $work_dir/extracted/my_stock/del-app/UPTsmService/ $work_dir/module/system
 mkdir -p $work_dir/module/system/system_ext/priv-app/
 cp -r $work_dir/extracted/system_ext/priv-app/BlurService/ $work_dir/module/system/system_ext/priv-app/
 cp -r $work_dir/extracted/system_ext/priv-app/DeepThinker/ $work_dir/module/system/system_ext/priv-app/
+
+mkdir -p $work_dir/module/system/system_ext/app/
+cp -r $work_dir/extracted/system_ext/app/SecurityPermission/ $work_dir/module/system/system_ext/app/
+
+mkdir -p $work_dir/module/system/system_ext/overlay/
+cp -r $work_dir/extracted/system_ext/overlay/OplusPermissionControllerOverlay/ $work_dir/module/system/system_ext/overlay/
 
 sed -i "s|REMOVE_MATCH|$REMOVEPATH\n|g" $work_dir/module/customize.sh
 

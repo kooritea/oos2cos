@@ -4,6 +4,11 @@
 
 模块模板参考自[酷安@天伞桜](https://www.coolapk.com/feed/61520805)
 
+## 注意
+# 目前本模块并不完善！
+现在使用本模块后将会导致无法授予读取应用列表权限，需要使用xposed模块临时修复，模块仓库见后面。  
+对于如定位这些原生有的但无法在本地化后的界面设置的权限，可以在开发者选项中打开`禁止权限监控`恢复为原生权限管理再进行设置
+
 ## 使用方法
 
 - 1、[https://yun.daxiaamu.com/OnePlus_Roms/](https://yun.daxiaamu.com/OnePlus_Roms/)下载需要提取的cn版全量包
@@ -13,8 +18,8 @@
 - 3、安装所需依赖，以arch系发行版为例，其他发行版自行解决
 
 ```bash
-yay -s payload-dumper-go
-sudo pacman -S erofs-utils 7z
+yay -S payload-dumper-go-bin
+sudo pacman -S erofs-utils 7zip
 ```
 
 - 4、进入项目根目录打开shell进行提取
@@ -27,6 +32,8 @@ bash ./main.sh ./PKG110_15.0.0.405.zip
 
 - 6、使用kernelsu/magisk安装模块，安装完之后暂不立即重启，使用带有root权限的文件管理器删除/data/system/package_cache下的所有文件夹，注意不是删除/data/system/package_cache文件夹
 
-- 7、重启
+- 7、(可选)安装辅助xposed模块[https://github.com/kooritea/oos2cosm](https://github.com/kooritea/oos2cosm)
 
-- 8、部分app(如google日历)如果被play商店更新了，则直接卸载即可使用回本地化后的日历
+- 8、重启
+
+- 9、部分app(如google日历)如果被play商店更新了，则直接卸载即可使用回本地化后的日历
