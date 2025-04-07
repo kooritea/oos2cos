@@ -1,5 +1,8 @@
 #!/bin/bash
 
+chmod +x ./utils.sh
+source ./utils.sh
+
 file=$1
 filename=$(basename "$1")
 work_dir=`pwd`/tmp
@@ -135,7 +138,7 @@ cp -r $work_dir/extracted/my_stock/del-app/Shortcuts/ $work_dir/module/system/pr
 cp -r $work_dir/extracted/my_stock/app/StdSP/ $work_dir/module/system/product/priv-app/
 cp -r $work_dir/extracted/my_stock/app/TasWallet/ $work_dir/module/system/product/priv-app/
 cp -r $work_dir/extracted/my_stock/priv-app/TravelEngine/ $work_dir/module/system/product/priv-app/
-cp -r $work_dir/extracted/my_stock/priv-app/UMS/ $work_dir/module/system/product/priv-app/
+# cp -r $work_dir/extracted/my_stock/priv-app/UMS/ $work_dir/module/system/product/priv-app/
 cp -r $work_dir/extracted/my_stock/del-app/UPTsmService/ $work_dir/module/system/product/priv-app/
 
 mkdir -p $work_dir/module/system/system_ext/priv-app/
@@ -147,6 +150,33 @@ cp -r $work_dir/extracted/system_ext/app/SecurityPermission/ $work_dir/module/sy
 
 mkdir -p $work_dir/module/system/system_ext/overlay/
 cp -r $work_dir/extracted/system_ext/overlay/OplusPermissionControllerOverlay/ $work_dir/module/system/system_ext/overlay/
+
+
+
+add_apex "$work_dir" com.android.permission
+
+APEX_MOUNT=""
+apex_dir_prefix="$work_dir/module/apex/"
+
+for apex_dir in $work_dir/module/apex/*; do
+  pack_name="${apex_dir#$apex_dir_prefix}"
+  APEX_MOUNT="$APEX_MOUNT\npack_versioncode=\$(get_active_apex_versioncode \"$pack_name\")"
+  for sub in "$apex_dir"/*; do
+    short_path="${sub#$apex_dir_prefix}"
+    filename="${short_path#*/}"
+    if [ -f "$sub" ]; then
+      APEX_MOUNT="$APEX_MOUNT\nmount --bind \$MODDIR/apex/$pack_name/$filename /apex/$pack_name/$filename"
+      APEX_MOUNT="$APEX_MOUNT\nmount --bind \$MODDIR/apex/$pack_name/$filename /apex/$pack_name@\$pack_versioncode/$filename"
+    elif [ -d "$sub" ]; then
+      APEX_MOUNT="$APEX_MOUNT\nmount --bind \$MODDIR/apex/$pack_name/$filename/ /apex/$pack_name/$filename/"
+      APEX_MOUNT="$APEX_MOUNT\nmount --bind \$MODDIR/apex/$pack_name/$filename/ /apex/$pack_name@\$pack_versioncode/$filename/"
+    fi
+  done
+done
+
+sed -i "s|#APEX_MOUNT_MATCH|$APEX_MOUNT\n|g" $work_dir/module/post-fs-data.sh
+
+
 
 sed -i "s|REMOVE_MATCH|$REMOVEPATH\n|g" $work_dir/module/customize.sh
 

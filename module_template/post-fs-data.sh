@@ -16,6 +16,11 @@ cp /my_stock/etc/extension/com.oplus.app-features.xml $MODDIR/my_stock/etc/exten
 sed -i '/<extend_features>/a\ \t<app_feature name="com.android.settings.cn_version"/>' $MODDIR/my_stock/etc/extension/com.oplus.app-features.xml
 mount --bind $MODDIR/my_stock/etc/extension/com.oplus.app-features.xml /my_stock/etc/extension/com.oplus.app-features.xml
 
+get_active_apex_versioncode(){
+  grep "moduleName=\"$1\"" /apex/apex-info-list.xml  | grep 'isActive="true"' | sed -n 's/.*versionCode="\([^"]*\)".*/\1/p' | grep -v '^[[:space:]]*$'
+}
+
+#APEX_MOUNT_MATCH
 
 # 这个脚本将以 post-fs-data 模式执行(系统启动前执行)
 # 更多信息请访问 Magisk 主题
