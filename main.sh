@@ -63,13 +63,14 @@ if [ -d "$work_dir" ]; then
 fi
 
 7z x "$file" "payload.bin" -o$work_dir
-# payload-dumper-go -output "$work_dir/extracted"  "$work_dir/payload.bin"
-payload-dumper-go -partitions my_region,my_stock,system_ext,my_product,system -output "$work_dir/extracted"  "$work_dir/payload.bin"
+payload-dumper-go -output "$work_dir/extracted"  "$work_dir/payload.bin"
+# payload-dumper-go -partitions my_region,my_stock,system_ext,my_product,system -output "$work_dir/extracted"  "$work_dir/payload.bin"
 fsck.erofs "$work_dir/extracted/my_region.img" --extract=$work_dir/extracted/my_region
 fsck.erofs "$work_dir/extracted/my_stock.img" --extract=$work_dir/extracted/my_stock
 fsck.erofs "$work_dir/extracted/system_ext.img" --extract=$work_dir/extracted/system_ext
 fsck.erofs "$work_dir/extracted/my_product.img" --extract=$work_dir/extracted/my_product
 fsck.erofs "$work_dir/extracted/system.img" --extract=$work_dir/extracted/system
+fsck.erofs "$work_dir/extracted/product.img" --extract=$work_dir/extracted/product
 
 cp -r module_template $module_dir
 
@@ -101,6 +102,7 @@ cp -r $work_dir/extracted/my_stock/app/ColorDirectUI/ $work_dir/module/system/pr
 cp -r $work_dir/extracted/my_stock/app/COSA/ $work_dir/module/system/product/app/
 cp -r $work_dir/extracted/my_stock/del-app/FileManager/ $work_dir/module/system/product/app/
 cp -r $work_dir/extracted/my_stock/del-app/OppoWeather2/ $work_dir/module/system/product/app/
+cp -r $work_dir/extracted/my_stock/del-app/Clock/ $work_dir/module/system/product/app/
 cp -r $work_dir/extracted/my_stock/app/SmartSideBar/ $work_dir/module/system/product/app/
 cp -r $work_dir/extracted/my_stock/del-app/Calendar/ $work_dir/module/system/product/app/
 REMOVEPATH="$REMOVEPATH\n/system/product/app/CalendarGoogle"
