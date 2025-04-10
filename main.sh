@@ -154,6 +154,7 @@ cp -r $work_dir/extracted/system_ext/overlay/OplusPermissionControllerOverlay/ $
 
 
 add_apex "$work_dir" com.android.permission
+add_apex "$work_dir" com.android.wifi
 
 APEX_MOUNT=""
 apex_dir_prefix="$work_dir/module/apex/"
