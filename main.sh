@@ -101,6 +101,7 @@ cp -r $work_dir/extracted/my_stock/app/ColorDirectUI/ $work_dir/module/system/pr
 cp -r $work_dir/extracted/my_stock/app/COSA/ $work_dir/module/system/product/app/
 cp -r $work_dir/extracted/my_stock/del-app/FileManager/ $work_dir/module/system/product/app/
 cp -r $work_dir/extracted/my_stock/del-app/OppoWeather2/ $work_dir/module/system/product/app/
+cp -r $work_dir/extracted/my_stock/del-app/Clock/ $work_dir/module/system/product/app/
 cp -r $work_dir/extracted/my_stock/app/SmartSideBar/ $work_dir/module/system/product/app/
 cp -r $work_dir/extracted/my_stock/del-app/Calendar/ $work_dir/module/system/product/app/
 REMOVEPATH="$REMOVEPATH\n/system/product/app/CalendarGoogle"
