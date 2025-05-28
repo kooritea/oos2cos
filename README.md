@@ -14,6 +14,14 @@
 
 - 4、云服务相关功能无法使用
 
+## 已知可用的功能
+
+- 1、coloros账号登录、钱包、nfc
+- 2、权限管理(读取应用列表不可用)
+- 3、日历、法定节假日闹钟
+- 4、负一屏(快捷方式不可用)
+- 5、文档浏览、文件管理、应用商店、天气及一些coloros自带的app
+
 ## 使用方法
 
 - 1、[https://yun.daxiaamu.com/OnePlus_Roms/](https://yun.daxiaamu.com/OnePlus_Roms/)下载需要提取的cn版全量包
@@ -42,3 +50,7 @@ bash ./main.sh ./PKG110_15.0.0.405.zip
 - 8、重启
 
 - 9、部分app(如google日历)如果被play商店更新了，则直接卸载即可使用回本地化后的日历
+
+## ACE5用户可以尝试用我提取好
+
+https://mega.nz/folder/Z7gABARZ#C2boSDjEXongvWdWWFLRxQ
